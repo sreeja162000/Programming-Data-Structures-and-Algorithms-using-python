@@ -1,0 +1,99 @@
+def threesquares(n):
+    for i in range(0,n):
+        for j in range(0,n):
+            for k in range(0,n):
+                if n==((i**2)+(j**2)+(k**2)):
+                    
+                    return True
+    else:return False
+
+def repfree(s):
+    l=list(s)
+    a=[]
+    for i in l:
+        if i not in a:
+            a.append(i)
+        else:return False
+    if l==a:
+        return True
+    
+def hillvalley(l):
+    x=hill(l)
+    y=valley(l)
+    if x or y:
+        return True
+    else:
+        return False
+
+def valley(l):
+    if (len(l) < 3):
+        return False
+
+    up_count = 1
+    low_count = 1
+
+    for i in range(0, len(l) - 1):
+        if l[i] > l[i + 1]:
+            if low_count > 1:
+                return False
+            up_count = up_count + 1
+        if l[i] < l[i + 1]:
+            low_count = low_count + 1
+        if l[i] == l[i + 1]:
+            return False
+            
+    if up_count > 1 and low_count > 1:
+        return True
+    else:
+        return False
+    
+def hill(l):
+    if (len(l) < 3):
+        return False
+
+    up_count = 1
+    low_count = 1
+
+    for i in range(0, len(l) - 1):
+        if l[i] < l[i + 1]:
+            if up_count > 1:
+                return False
+            low_count = low_count + 1
+        if l[i] > l[i + 1]:
+            up_count = up_count + 1
+        if l[i] == l[i + 1]:
+            return False
+            
+    if up_count > 1 and low_count > 1:
+        return True
+    else:
+        return False
+
+import ast
+
+def tolist(inp):
+  inp = "["+inp+"]"
+  inp = ast.literal_eval(inp)
+  return (inp[0],inp[1])
+
+def parse(inp):
+  inp = ast.literal_eval(inp)
+  return (inp)
+
+fncall = input()
+lparen = fncall.find("(")
+rparen = fncall.rfind(")")
+fname = fncall[:lparen]
+farg = fncall[lparen+1:rparen]
+
+if fname == "threesquares":
+   arg = parse(farg)
+   print(threesquares(arg))
+elif fname == "repfree":
+   arg = parse(farg)
+   print(repfree(arg))
+elif fname == "hillvalley":
+   arg = parse(farg)
+   print(hillvalley(arg))
+else:
+   print("Function", fname, "unknown")
