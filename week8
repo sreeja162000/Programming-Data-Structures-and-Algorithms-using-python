@@ -1,0 +1,17 @@
+n,k=map(int,input().split())
+arr=[int(input()) for _ in range(n)]
+best = []
+result = 0
+for j in range(n+1):
+    best.append([])
+    for p in range(k+1):
+        best[j].append(0)
+
+for p in range(1,n+1):
+        best[p][0] = arr[p-1]+max(0,best[p-1][0])
+        result = max(result,best[p][0])
+for p in range(1,n+1):
+        for u in range(1,k+1):
+            best[p][u] = max(arr[p-1]+max(0,best[p-1][u]),best[p-1][u-1])
+            result = max(result,best[p][u])
+print(result)
