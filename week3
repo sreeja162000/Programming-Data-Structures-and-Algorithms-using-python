@@ -1,0 +1,59 @@
+def remdup(l):
+    s=[]
+    for i in l:
+        if i not in s:
+            s.append(i)
+    return(s)
+
+def iseven(n):
+    if n%2==0:
+        return True
+    
+def sumsquare(l):
+    a=0
+    b=0
+    for i in l:
+        if iseven(i):
+            a=a+(i*i)
+        else:
+            b=b+(i*i)
+    return([b,a])
+
+def transpose(l):
+    s=[]
+    for i in range(len(l[0])):
+        k=[]
+        for j in range(len(l)):
+            k.append(l[j][i])
+        s.append(k)
+    return(s)
+
+import ast
+
+def parse(inp):
+  inp = ast.literal_eval(inp)
+  return (inp)
+
+fncall = input()
+lparen = fncall.find("(")
+rparen = fncall.rfind(")")
+fname = fncall[:lparen]
+farg = fncall[lparen+1:rparen]
+
+if fname == "remdup":
+  arg = parse(farg)
+  print(remdup(arg))
+
+if fname == "sumsquare":
+  arg = parse(farg)
+  print(sumsquare(arg))
+
+if fname == "transpose":
+  arg = parse(farg)
+  savearg = arg
+  ans = transpose(arg)
+  if savearg == arg:
+    print(ans)
+  else:
+    print("Side effect")
+
